@@ -1,0 +1,30 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: infra
+  name: infra-systemd-service
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,IyEgL3Vzci9iaW4vZW52IHNoCiMKIyB0aGlzIHNjcmlwdCBpcyB0cmlnZ2VyZWQgYnkgYSBib290LXRpbWUgdW5pdCBmaWxlCiMKZWNobyAiIyMjIFRoZSBzY3JpcHQgc3RhcnQgb24gJChkYXRlKSAjIyMiID4+IC92YXIvbG9nL2luZnJhLXN5c3RlbWQtc2VydmljZS5sb2cKIwo=
+        filesystem: root
+        mode: 493
+        path: /usr/local/bin/infra-systemd-service.sh
+    systemd:
+      units:
+        - name: infra-systemd.service
+          contents: |
+            [Unit]
+            Description=Test infra systemd service
+            [Service]
+            Type=oneshot
+            ExecStart=/bin/bash /usr/local/bin/infra-systemd-service.sh
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+    osImageURL: ""
