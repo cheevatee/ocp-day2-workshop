@@ -1,0 +1,13 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+  name: test-vsphere-sc
+parameters:
+  datastore: datastore1
+  diskformat: thin
+provisioner: kubernetes.io/vsphere-volume
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true

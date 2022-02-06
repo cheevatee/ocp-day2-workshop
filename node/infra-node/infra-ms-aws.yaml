@@ -16,7 +16,7 @@ spec:
       labels:
         machine.openshift.io/cluster-api-cluster: cluster-pkht6-vvs4z
         machine.openshift.io/cluster-api-machine-role: infra
-        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machine-type: infra
         machine.openshift.io/cluster-api-machineset: cluster-pkht6-vvs4z-infra-ap-southeast-1a
     spec:
       metadata:
