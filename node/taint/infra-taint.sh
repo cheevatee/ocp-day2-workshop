@@ -11,4 +11,4 @@
 # - Existing pods on the node that do not have a matching toleration are removed.
 
 
-oc adm taint nodes ip-10-0-132-165.ap-southeast-1.compute.internal infra=true:NoExecute
+oc adm taint nodes ip-10-0-136-33.ap-southeast-1.compute.internal infra=true:NoSchedule

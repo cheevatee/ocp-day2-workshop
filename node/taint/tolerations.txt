@@ -1,0 +1,10 @@
+spec:
+....
+  template:
+....
+    spec:
+      tolerations:
+      - key: "infra"
+        value: "true"
+        operator: "Equal"
+        effect: "NoSchedule"
