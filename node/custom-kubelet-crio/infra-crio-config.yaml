@@ -1,0 +1,13 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: ContainerRuntimeConfig
+metadata:
+ name: infra-overlay-size
+spec:
+ machineConfigPoolSelector:
+   matchLabels:
+     custom-crio: infra-overlay-size
+ containerRuntimeConfig:
+   pidsLimit: 2048 
+   logLevel: debug 
+   overlaySize: 8G 
+   logSizeMax: "-1"

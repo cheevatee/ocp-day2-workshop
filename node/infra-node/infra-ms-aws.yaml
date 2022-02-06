@@ -22,9 +22,9 @@ spec:
       metadata:
         labels:
           node-role.kubernetes.io/infra: "" 
-      taints: 
-        - key: node-role.kubernetes.io/infra
-          effect: NoSchedule
+#      taints: 
+#        - key: node-role.kubernetes.io/infra
+#          effect: NoSchedule
       providerSpec:
         value:
           ami:
@@ -40,7 +40,8 @@ spec:
           deviceIndex: 0
           iamInstanceProfile:
             id: cluster-pkht6-vvs4z-worker-profile 
-          instanceType: m4.large
+#          instanceType: m4.large
+          instanceType: m5.2xlarge
           kind: AWSMachineProviderConfig
           placement:
             availabilityZone: ap-southeast-1a

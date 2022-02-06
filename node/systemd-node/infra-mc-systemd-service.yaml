@@ -3,7 +3,7 @@ kind: MachineConfig
 metadata:
   labels:
     machineconfiguration.openshift.io/role: infra
-  name: infra-systemd-service
+  name: 50-infra-systemd-service
 spec:
   config:
     ignition:

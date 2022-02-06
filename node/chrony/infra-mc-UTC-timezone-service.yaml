@@ -1,0 +1,31 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: infra
+  name: 50-infra-timezone-service
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,IyEgL3Vzci9iaW4vZW52IHNoCiMKIyB0aGlzIHNjcmlwdCBpcyB0cmlnZ2VyZWQgYnkgYSBib290LXRpbWUgdW5pdCBmaWxlCiMKZWNobyAiIyMjIFNldCB0aW1lem9uZSBvbiAkKGRhdGUpICMjIyIgPj4gL3Zhci9sb2cvaW5mcmEtdGltZXpvbmUtc2VydmljZS5sb2cKdGltZWRhdGVjdGwgc2V0LXRpbWV6b25lIFVUQwp0aW1lZGF0ZWN0bCA+PiAvdmFyL2xvZy9pbmZyYS10aW1lem9uZS1zZXJ2aWNlLmxvZwojCg==
+        filesystem: root
+        mode: 493
+        path: /usr/local/bin/infra-timezone-service.sh
+    systemd:
+      units:
+        - name: infra-timezone.service
+          contents: |
+            [Unit]
+            Description=Set infra node timezone
+            [Service]
+            Type=oneshot
+            ExecStart=/bin/bash /usr/local/bin/infra-timezone-service.sh
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+    osImageURL: ""
+

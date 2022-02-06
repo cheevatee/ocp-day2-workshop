@@ -1,0 +1,10 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: set-infra-max-pods 
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      custom-kubelet: infra-max-pods
+  kubeletConfig:
+    maxPods: 100
