@@ -11,5 +11,5 @@
 # - Existing pods on the node that do not have a matching toleration are removed.
 
 
-oc adm taint nodes ip-10-0-150-30.ap-southeast-1.compute.internal infra=true:NoSchedule
-oc label node ip-10-0-150-30.ap-southeast-1.compute.internal node-role.kubernetes.io/worker-
+oc adm taint nodes ip-10-0-143-47.ap-southeast-1.compute.internal infra=true:NoSchedule
+oc label node ip-10-0-143-47.ap-southeast-1.compute.internal node-role.kubernetes.io/worker-

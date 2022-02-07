@@ -1,0 +1,13 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-namespace-to-pod
+spec:
+  podSelector:
+    matchLabels:
+      app: hello2
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            name: net-project-1
