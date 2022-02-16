@@ -9,11 +9,11 @@ spec:
     type: "elasticsearch"  
     retentionPolicy: 
       application:
-        maxAge: 7d
+        maxAge: 3d
       infra:
-        maxAge: 7d
+        maxAge: 3d
       audit:
-        maxAge: 7d
+        maxAge: 3d
     elasticsearch:
       nodeCount: 3
       nodeSelector:
@@ -31,7 +31,7 @@ spec:
           memory: 8Gi  
       tolerations:
       - key: infra
-        value: true
+        value: "true"
         effect: NoSchedule
   visualization:
     type: "kibana"  
@@ -41,7 +41,7 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
       - key: infra
-        value: true
+        value: "true"
         effect: NoSchedule
   curation:
     type: "curator"
@@ -51,7 +51,7 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
       - key: infra
-        value: true
+        value: "true"
         effect: NoSchedule
   collection:
     logs:
@@ -60,7 +60,7 @@ spec:
         tolerations:
         - effect: NoSchedule
           key: infra
-          value: true
+          value: "true"
         - effect: NoSchedule
           key: infra-router
-          value: true
+          value: "true"
