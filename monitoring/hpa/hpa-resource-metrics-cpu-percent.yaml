@@ -1,0 +1,18 @@
+# oc autoscale --name hello-cpu-hpa deployment/hello-openshift --min 1 --max 10 --cpu-percent 10
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  creationTimestamp: null
+  name: hpa-resource-metrics-cpu-percent
+spec:
+  maxReplicas: 10
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-openshift
+  targetCPUUtilizationPercentage: 10
+status:
+  currentReplicas: 0
+  desiredReplicas: 0
