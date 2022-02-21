@@ -4,15 +4,15 @@ metadata:
   name: hpa-resource-metrics-memory 
 spec:
   scaleTargetRef:
-    apiVersion: v1 
+    apiVersion: apps/v1 
     kind: Deployment 
     name: hello-openshift
   minReplicas: 1 
-  maxReplicas: 5
+  maxReplicas: 10
   metrics: 
   - type: Resource
     resource:
       name: memory 
       target:
         type: AverageValue 
-        averageValue: 500Mi
+        averageValue: 5Mi
