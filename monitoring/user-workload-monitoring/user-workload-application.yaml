@@ -1,67 +1,43 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: user-workload
-  name: user-workload
-spec:
-  ports:
-  - name: http
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-  - name: metrics
-    port: 9113
-    protocol: TCP
-    targetPort: 9113
-  selector:
-    app: user-workload
-  type: ClusterIP
-status:
-  loadBalancer: {}
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: ns1
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations: null
   labels:
-    app: user-workload
-    app.kubernetes.io/component: user-workload
-    app.kubernetes.io/instance: user-workload
-    app.kubernetes.io/part-of: user-workload
-    app.openshift.io/runtime: openshift
-  name: user-workload
+    app: prometheus-example-app
+  name: prometheus-example-app
+#  namespace: ns1
 spec:
-  progressDeadlineSeconds: 30
   replicas: 1
   selector:
     matchLabels:
-      app: user-workload
+      app: prometheus-example-app
   template:
     metadata:
       labels:
-        app: user-workload
+        app: prometheus-example-app
     spec:
       containers:
-      - image: quay.io/openshift-examples/web:master
-        name: web
-        ports:
-        - containerPort: 8080
-          name: http
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8081
-      - args:
-        - -nginx.scrape-uri=http://localhost:8081/
-        image: docker.io/nginx/nginx-prometheus-exporter:latest
-        name: nginx-prometheus-exporter
-        ports:
-        - containerPort: 9113
-          name: metrics
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 9113
+      - image: ghcr.io/rhobs/prometheus-example-app:0.3.0
+        imagePullPolicy: IfNotPresent
+        name: prometheus-example-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus-example-app
+  name: prometheus-example-app
+#  namespace: ns1
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: web
+  selector:
+    app: prometheus-example-app
+  type: ClusterIP

@@ -2,14 +2,14 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app: user-workload
-  name: user-workload
+    k8s-app: prometheus-example-monitor
+  name: prometheus-example-monitor
+#  namespace: ns1
 spec:
   endpoints:
   - interval: 30s
-    port: metrics
+    port: web
     scheme: http
   selector:
     matchLabels:
-      app: user-workload
-
+      app: prometheus-example-app
