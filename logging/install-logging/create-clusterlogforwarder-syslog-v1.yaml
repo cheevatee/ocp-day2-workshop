@@ -1,0 +1,32 @@
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+   - name: syslog-ocp
+     type: syslog
+     syslog:
+      appName: ocp-logs
+      facility: user
+      msgID: ocp-logs-msg
+      procID: ocp-logs-proc
+      rfc: RFC5424
+      severity: debug
+     url: 'tcp://192.168.0.99:514'
+  pipelines:
+  - name: all-to-default
+    inputRefs:
+    - infrastructure
+    - application
+    - audit
+    outputRefs:
+    - default
+  - name: ocp-syslog
+    inputRefs:
+    - infrastructure
+    - application
+    - audit
+    outputRefs:
+    - syslog-ocp
